@@ -1,0 +1,13 @@
+fileFormatVersion: 2
+guid: 47f9645fd61847d4a80719ceee82940b
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - filamentMaterial: {fileID: 2100000, guid: 7c26fb1e0a7eefc44b90ebfe1ba3cac7, type: 2}
+  - glassMaterial: {fileID: 2100000, guid: b0849dbacd7ada64b975365a52538a78, type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -6,8 +6,6 @@ public class ElectricalElementController : MonoBehaviour
 {
 	public GameObject vertexPrefab;
 
-	public GameObject endpoint0;
-	public GameObject endpoint1;
 	public GameObject vertex0;
 	public GameObject vertex1;
 
@@ -16,8 +14,18 @@ public class ElectricalElementController : MonoBehaviour
 	public float resistance;
 	public float snapThreshold;
 
-	private Vector3 snapPosition;
+    public bool isPowered = false;
+
+    public GameObject endpoint0;
+    public GameObject endpoint1;
+    private Vector3 snapPosition;
 	private Quaternion snapRotation;
+
+    protected void Start()
+    {
+        endpoint0 = transform.Find("Endpoint (0)").gameObject;
+        endpoint1 = transform.Find("Endpoint (1)").gameObject;
+    }
 
     void GrabStart()
     {
@@ -28,7 +36,7 @@ public class ElectricalElementController : MonoBehaviour
     void SnapOrDelete()
     {
     	if ((this.transform.position - snapPosition).magnitude > snapThreshold) {
-    		destroy(gameObject);
+    		Destroy(gameObject);
     	} else {
     		this.transform.position = snapPosition;
     		this.transform.rotation = snapRotation;
@@ -39,14 +47,14 @@ public class ElectricalElementController : MonoBehaviour
     {
     	// Instantiate new wires at vertices
     	if (vertex1 != null) {
-    		endpoint1.position = vertex1.position;
+    		endpoint1.transform.position = vertex1.transform.position;
     	} else {
-    		Instantiate(vertexPrefab, endpoint1.position, Quaternion.identity);
+    		Instantiate(vertexPrefab, endpoint1.transform.position, Quaternion.identity);
     	}
     	if (vertex0 != null) {
-    		endpoint0.position = vertex0.position;
+    		endpoint0.transform.position = vertex0.transform.position;
     	} else {
-    		Instantiate(vertexPrefab, endpoint0.position, Quaternion.identity);
+    		Instantiate(vertexPrefab, endpoint0.transform.position, Quaternion.identity);
     	}
     }
 }
