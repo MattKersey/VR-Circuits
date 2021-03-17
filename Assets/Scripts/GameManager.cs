@@ -35,6 +35,12 @@ public class GameManager : MonoBehaviour
 
     public void setupLevel()
     {
-
+        GameObject[] edges = GameObject.FindGameObjectsWithTag("Edge");
+        foreach (GameObject edge in edges)
+        {
+            ElectricalElementController controller = edge.GetComponent<ElectricalElementController>();
+            if (controller != null)
+                controller.Delete();
+        }
     }
 }

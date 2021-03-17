@@ -4,15 +4,19 @@ using UnityEngine;
 
 public class VertexController : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public List<GameObject> connectedComponents = new List<GameObject>();
+    public GameObject wirePrefab;
+
+    public void spawnNewWire()
     {
-        
+        GameObject wire = Instantiate(wirePrefab, this.transform.position, Quaternion.identity);
+        wire.transform.parent = this.transform;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void removeConnectedComponent(GameObject go)
     {
-        
+        connectedComponents.Remove(go);
+        if (connectedComponents.Count == 0)
+            Destroy(gameObject);
     }
 }

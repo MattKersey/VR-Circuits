@@ -49,6 +49,8 @@ public class CustomBehaviour : MonoBehaviour
         vertexPrefab = bl.vertexPrefab;
         gameManager = bl.gameManager;
 
+        this.tag = "Essential Edge";
+
         endpoint0 = Instantiate(endpointPrefab);
         endpoint0.transform.parent = this.transform;
         endpoint0.name = "Endpoint (0)";
@@ -58,8 +60,10 @@ public class CustomBehaviour : MonoBehaviour
 
         vertex0 = Instantiate(vertexPrefab);
         vertex0.transform.parent = this.transform;
+        vertex0.GetComponent<VertexController>().connectedComponents.Add(this.gameObject);
         vertex1 = Instantiate(vertexPrefab);
         vertex1.transform.parent = this.transform;
+        vertex1.GetComponent<VertexController>().connectedComponents.Add(this.gameObject);
 
         // Qurey additional data to get the name
         string value = "";
@@ -94,6 +98,7 @@ public class CustomBehaviour : MonoBehaviour
         if (this.transform.Find("Scene") == null)
             return false;
         controller = this.gameObject.AddComponent<ElectricalElementController>();
+        controller.Start();
         connectionSetup(
             new Vector3(0, 0, 0.025f),
             new Vector3(0, 0, -0.025f)
@@ -112,6 +117,7 @@ public class CustomBehaviour : MonoBehaviour
             )
             return false;
         controller = this.gameObject.AddComponent<ElectricalElementController>();
+        controller.Start();
         this.transform.Find("Scene").Find("glass0").GetComponent<MeshRenderer>().material = glassMaterial;
         this.transform.Find("Scene").Find("filament0").GetComponent<MeshRenderer>().material = filamentMaterial;
         this.transform.Find("Scene").Find("filament1").GetComponent<MeshRenderer>().material = filamentMaterial;
@@ -129,6 +135,7 @@ public class CustomBehaviour : MonoBehaviour
         if (this.transform.Find("Scene") == null)
             return false;
         controller = this.gameObject.AddComponent<ElectricalElementController>();
+        controller.Start();
         connectionSetup(
             new Vector3(0, 0, 0.04f),
             new Vector3(0, 0, -0.04f)
@@ -142,6 +149,7 @@ public class CustomBehaviour : MonoBehaviour
         if (this.transform.Find("Scene") == null)
             return false;
         controller = this.gameObject.AddComponent<ElectricalElementController>();
+        controller.Start();
         connectionSetup(
             new Vector3(0, 0, 0.005f),
             new Vector3(0, 0, -0.005f)
@@ -173,6 +181,8 @@ public class CustomBehaviour : MonoBehaviour
         vertex1.transform.localScale = vertexScale;
         controller.vertex0 = vertex0;
         controller.vertex1 = vertex1;
+        vertex0.GetComponent<VertexController>().spawnNewWire();
+        vertex1.GetComponent<VertexController>().spawnNewWire();
     }
 
     // Update is called once per frame

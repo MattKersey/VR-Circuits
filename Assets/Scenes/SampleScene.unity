@@ -641,6 +641,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce0c8d949b1014489a6d2437177cd795, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  connectedComponents: []
+  wirePrefab: {fileID: 0}
 --- !u!135 &2123719452
 SphereCollider:
   m_ObjectHideFlags: 0
