@@ -1,0 +1,21 @@
+{
+	"battery": true,
+	"batteryCoords": {
+		"x": -5,
+		"y": 0,
+		"z": 0
+	},
+	"bulb": true,
+	"bulbCoords": {
+		"x": 5,
+		"y": 0,
+		"z": 0
+	},
+	"resistor": false,
+	"resistorCoords": {
+	},
+	"toggle": false,
+	"toggleCoords": {
+	}
+}
+		
