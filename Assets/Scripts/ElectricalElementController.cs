@@ -12,36 +12,17 @@ public class ElectricalElementController : MonoBehaviour
 	public float voltage;
 	public float current;
 	public float resistance;
-	public float snapThreshold;
 
     public bool isPowered = false;
 
     public GameObject endpoint0;
     public GameObject endpoint1;
-    private Vector3 snapPosition;
-	private Quaternion snapRotation;
 
     public void Start()
     {
         Debug.Log(this.gameObject.name);
         endpoint0 = transform.Find("Endpoint (0)").gameObject;
         endpoint1 = transform.Find("Endpoint (1)").gameObject;
-    }
-
-    void GrabStart()
-    {
-    	snapPosition = this.transform.position;
-    	snapRotation = this.transform.rotation;
-    }
-
-    void SnapOrDelete()
-    {
-    	if ((this.transform.position - snapPosition).magnitude > snapThreshold) {
-            Delete();
-    	} else {
-    		this.transform.position = snapPosition;
-    		this.transform.rotation = snapRotation;
-    	}
     }
 
     public void Delete()
@@ -53,7 +34,7 @@ public class ElectricalElementController : MonoBehaviour
         Destroy(gameObject);
     }
 
-    void EndManipulation()
+    public void EndManipulation()
     {
         if (vertex0 != null && vertex1 != null && vertex0 == vertex1)
         {
