@@ -38,12 +38,12 @@ public class WireController : ElectricalElementController
         rotation.SetFromToRotation(Vector3.up, difference);
         cylinder.transform.localRotation = rotation;
         cylinder.transform.localPosition = avgPos;
-        if (length > 0.25f)
+        if (length > 0.125f)
         {
             cylinder.SetActive(true);
             filament.SetActive(true);
-            cylinder.transform.localScale = new Vector3(thickness, length - 0.25f, thickness);
-            filament.transform.localScale = new Vector3(filamentThickness, length / (length - 0.25f), filamentThickness);
+            cylinder.transform.localScale = new Vector3(thickness, length - 0.125f, thickness);
+            filament.transform.localScale = new Vector3(filamentThickness, length / (length - 0.125f), filamentThickness);
         }
         else
         {

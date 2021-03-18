@@ -52,16 +52,20 @@ public class CustomBehaviour : MonoBehaviour
         this.tag = "Essential Edge";
 
         endpoint0 = Instantiate(endpointPrefab);
+        endpoint0.SetActive(false);
         endpoint0.transform.parent = this.transform;
         endpoint0.name = "Endpoint (0)";
         endpoint1 = Instantiate(endpointPrefab);
+        endpoint1.SetActive(false);
         endpoint1.transform.parent = this.transform;
         endpoint1.name = "Endpoint (1)";
 
         vertex0 = Instantiate(vertexPrefab);
+        vertex0.SetActive(false);
         vertex0.transform.parent = this.transform;
         vertex0.GetComponent<VertexController>().connectedComponents.Add(this.gameObject);
         vertex1 = Instantiate(vertexPrefab);
+        vertex1.SetActive(false);
         vertex1.transform.parent = this.transform;
         vertex1.GetComponent<VertexController>().connectedComponents.Add(this.gameObject);
 
@@ -167,8 +171,10 @@ public class CustomBehaviour : MonoBehaviour
            );
         endpoint0.transform.localPosition = pos0;
         endpoint0.transform.localScale = endpointScale;
+        endpoint0.SetActive(true);
         endpoint1.transform.localPosition = pos1;
         endpoint1.transform.localScale = endpointScale;
+        endpoint1.SetActive(true);
 
         Vector3 vertexScale = new Vector3(
             vertex0.transform.localScale.x / this.transform.localScale.x,
@@ -177,8 +183,10 @@ public class CustomBehaviour : MonoBehaviour
            );
         vertex0.transform.localPosition = pos0;
         vertex0.transform.localScale = vertexScale;
+        vertex0.SetActive(true);
         vertex1.transform.localPosition = pos1;
         vertex1.transform.localScale = vertexScale;
+        vertex1.SetActive(true);
         controller.vertex0 = vertex0;
         controller.vertex1 = vertex1;
         vertex0.GetComponent<VertexController>().spawnNewWire();
