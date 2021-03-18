@@ -122,7 +122,7 @@ public class CustomBehaviour : MonoBehaviour
             )
             return false;
         this.transform.localScale = new Vector3(5, 5, 5);
-        controller = this.gameObject.AddComponent<ElectricalElementController>();
+        controller = this.gameObject.AddComponent<BulbController>();
         controller.Start();
         this.transform.Find("Scene").Find("glass0").GetComponent<MeshRenderer>().material = glassMaterial;
         this.transform.Find("Scene").Find("filament0").GetComponent<MeshRenderer>().material = filamentMaterial;
@@ -156,7 +156,7 @@ public class CustomBehaviour : MonoBehaviour
         if (this.transform.Find("Scene") == null)
             return false;
         this.transform.localScale = new Vector3(30, 30, 30);
-        controller = this.gameObject.AddComponent<ElectricalElementController>();
+        controller = this.gameObject.AddComponent<ToggleController>();
         controller.Start();
         connectionSetup(
             new Vector3(0, 0, 0.005f),

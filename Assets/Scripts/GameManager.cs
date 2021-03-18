@@ -41,7 +41,7 @@ public class GameManager : MonoBehaviour
         "level4params"
     };
     private ElectricalElementController batteryController;
-    private ElectricalElementController bulbController;
+    private BulbController bulbController;
     private ElectricalElementController resistorController;
     private ElectricalElementController toggleController;
 
@@ -64,7 +64,7 @@ public class GameManager : MonoBehaviour
             {
                 isReady = true;
                 batteryController = battery.GetComponent<ElectricalElementController>();
-                bulbController = bulb.GetComponent<ElectricalElementController>();
+                bulbController = bulb.GetComponent<BulbController>();
                 resistorController = resistor.GetComponent<ElectricalElementController>();
                 toggleController = toggle.GetComponent<ElectricalElementController>();
                 setupLevel();
@@ -226,6 +226,7 @@ public class GameManager : MonoBehaviour
         if ((bulbNode0 == batteryNode0 && bulbNode1 == batteryNode1) ||
             (bulbNode0 == batteryNode1 && bulbNode1 == batteryNode0))
         {
+            bulbController.power = resistorPowered ? 5.0f : 8.0f;
             bulbPowered = true;
             if (!poweredNodes.Contains(bulbNode0))
                 poweredNodes.Add(bulbNode0);
@@ -251,6 +252,7 @@ public class GameManager : MonoBehaviour
             if (!poweredNodes.Contains(batteryNode1))
                 poweredNodes.Add(batteryNode1);
             resistorPowered = true;
+            bulbController.power = 2.0f;
             bulbPowered = true;
         }
 
