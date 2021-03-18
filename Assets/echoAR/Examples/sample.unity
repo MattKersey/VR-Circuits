@@ -562,7 +562,7 @@ Light:
   m_Type: 1
   m_Shape: 0
   m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
-  m_Intensity: 1
+  m_Intensity: 0.8
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.802082
@@ -812,6 +812,10 @@ MonoBehaviour:
     type: 3}
   vertexPrefab: {fileID: 4497455988135393398, guid: 145c70d76fe38284bbfd7e6765a67b37,
     type: 3}
+  lightPrefab: {fileID: 8293322823114518226, guid: 10bc89f522087ff4096381625c4f9750,
+    type: 3}
+  pedestalPrefab: {fileID: 8973662651191940122, guid: 305501756f0b16946880c19f2fb47c74,
+    type: 3}
   gameManager: {fileID: 1419158677}
 --- !u!1001 &1397231234
 PrefabInstance:
@@ -946,7 +950,7 @@ MonoBehaviour:
   resistor: {fileID: 0}
   toggle: {fileID: 0}
   echoAR: {fileID: 1349425526}
-  level: 0
+  level: 2
 --- !u!1001 &1776355712
 PrefabInstance:
   m_ObjectHideFlags: 0

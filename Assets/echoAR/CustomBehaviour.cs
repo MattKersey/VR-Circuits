@@ -21,6 +21,9 @@ public class CustomBehaviour : MonoBehaviour
     private GameObject endpointPrefab;
     private GameObject vertexPrefab;
     private GameObject gameManager;
+    private GameObject lightPrefab;
+    private GameObject pedestalPrefab;
+    private GameObject toggleHandlePrefab;
 
     private GameObject endpoint0;
     private GameObject endpoint1;
@@ -48,6 +51,9 @@ public class CustomBehaviour : MonoBehaviour
         endpointPrefab = bl.endpointPrefab;
         vertexPrefab = bl.vertexPrefab;
         gameManager = bl.gameManager;
+        lightPrefab = bl.lightPrefab;
+        pedestalPrefab = bl.pedestalPrefab;
+        toggleHandlePrefab = bl.toggleHandlePrefab;
 
         this.tag = "Essential Edge";
 
@@ -123,6 +129,7 @@ public class CustomBehaviour : MonoBehaviour
             return false;
         this.transform.localScale = new Vector3(5, 5, 5);
         controller = this.gameObject.AddComponent<BulbController>();
+        controller.lightPrefab = lightPrefab;
         controller.Start();
         this.transform.Find("Scene").Find("glass0").GetComponent<MeshRenderer>().material = glassMaterial;
         this.transform.Find("Scene").Find("filament0").GetComponent<MeshRenderer>().material = filamentMaterial;
@@ -156,6 +163,12 @@ public class CustomBehaviour : MonoBehaviour
         if (this.transform.Find("Scene") == null)
             return false;
         this.transform.localScale = new Vector3(30, 30, 30);
+        GameObject toggleHandle = Instantiate(toggleHandlePrefab);
+        Vector3 position = toggleHandle.transform.localPosition;
+        Vector3 scale = toggleHandle.transform.localScale;
+        toggleHandle.transform.parent = this.transform.Find("Scene").Find("Sphere.003");
+        toggleHandle.transform.localScale = scale;
+        toggleHandle.transform.localPosition = position;
         controller = this.gameObject.AddComponent<ToggleController>();
         controller.Start();
         connectionSetup(
@@ -163,6 +176,13 @@ public class CustomBehaviour : MonoBehaviour
             new Vector3(0, 0, -0.005f)
             );
         gameManager.GetComponent<GameManager>().toggle = this.gameObject;
+
+        GameObject pedestal = Instantiate(pedestalPrefab);
+        position = pedestal.transform.localPosition;
+        scale = pedestal.transform.localScale;
+        pedestal.transform.parent = this.transform;
+        pedestal.transform.localScale = scale;
+        pedestal.transform.localPosition = position;
         return true;
     }
 

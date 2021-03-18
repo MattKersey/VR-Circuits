@@ -8,6 +8,7 @@ public class BulbController : ElectricalElementController
 
     private List<Renderer> filaments = new List<Renderer>();
     private Color emissionColor;
+    private Light bulbLight;
 
     new void Start()
     {
@@ -16,6 +17,9 @@ public class BulbController : ElectricalElementController
         filaments.Add(transform.Find("Scene").Find("filament1").GetComponent<Renderer>());
         filaments.Add(transform.Find("Scene").Find("filament2").GetComponent<Renderer>());
         emissionColor = filaments[0].material.GetColor("_EmissionColor");
+        bulbLight = Instantiate(lightPrefab).GetComponent<Light>();
+        bulbLight.transform.parent = this.transform;
+        bulbLight.intensity = 0;
     }
 
     // Update is called once per frame
@@ -26,6 +30,7 @@ public class BulbController : ElectricalElementController
             foreach (Renderer filament in filaments)
             {
                 filament.material.SetColor("_EmissionColor", emissionColor * power);
+                bulbLight.intensity = power / 4;
             }
         }
         else
@@ -33,6 +38,7 @@ public class BulbController : ElectricalElementController
             foreach (Renderer filament in filaments)
             {
                 filament.material.SetColor("_EmissionColor", emissionColor * -10.0f);
+                bulbLight.intensity = 0;
             }
         }
     }

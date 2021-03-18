@@ -8,5 +8,8 @@ public class BehaviorLinks : MonoBehaviour
     public Material glassMaterial;
     public GameObject endpointPrefab;
     public GameObject vertexPrefab;
+    public GameObject lightPrefab;
+    public GameObject pedestalPrefab;
+    public GameObject toggleHandlePrefab;
     public GameObject gameManager;
 }

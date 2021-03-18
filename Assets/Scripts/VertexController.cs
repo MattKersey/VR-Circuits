@@ -18,8 +18,9 @@ public class VertexController : MonoBehaviour
 
     public void removeConnectedComponent(GameObject go)
     {
-        connectedComponents.Remove(go);
-        if (connectedComponents.Count == 0)
+        while (connectedComponents.Contains(go))
+            connectedComponents.Remove(go);
+        if (connectedComponents.Count == 1)
             Destroy(gameObject);
     }
 

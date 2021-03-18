@@ -130,7 +130,7 @@ public class OVRGrabbable : MonoBehaviour
 
     void Awake()
     {
-        if (m_grabPoints.Length == 0)
+        if (m_grabPoints == null || m_grabPoints.Length == 0)
         {
             // Get the collider from the grabbable
             Collider collider = this.GetComponent<Collider>();

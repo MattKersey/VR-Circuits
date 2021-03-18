@@ -7,12 +7,16 @@ public class LevelData
 {
     public bool battery;
     public Vector3 batteryCoords;
+    public float batteryRot;
     public bool bulb;
     public Vector3 bulbCoords;
+    public float bulbRot;
     public bool resistor;
     public Vector3 resistorCoords;
+    public float resistorRot;
     public bool toggle;
     public Vector3 toggleCoords;
+    public float toggleRot;
 }
 
 public class Node
@@ -43,7 +47,7 @@ public class GameManager : MonoBehaviour
     private ElectricalElementController batteryController;
     private BulbController bulbController;
     private ElectricalElementController resistorController;
-    private ElectricalElementController toggleController;
+    private ToggleController toggleController;
 
     // Start is called before the first frame update
     void Start()
@@ -66,7 +70,7 @@ public class GameManager : MonoBehaviour
                 batteryController = battery.GetComponent<ElectricalElementController>();
                 bulbController = bulb.GetComponent<BulbController>();
                 resistorController = resistor.GetComponent<ElectricalElementController>();
-                toggleController = toggle.GetComponent<ElectricalElementController>();
+                toggleController = toggle.GetComponent<ToggleController>();
                 setupLevel();
             }
         }
@@ -95,16 +99,17 @@ public class GameManager : MonoBehaviour
         TextAsset levelJSON = Resources.Load<TextAsset>(levelFiles[level]);
         LevelData levelData = JsonUtility.FromJson<LevelData>(levelJSON.ToString());
 
-        setupObject(battery, levelData.battery, levelData.batteryCoords);
-        setupObject(bulb, levelData.bulb, levelData.bulbCoords);
-        setupObject(resistor, levelData.resistor, levelData.resistorCoords);
-        setupObject(toggle, levelData.toggle, levelData.toggleCoords);
+        setupObject(battery, levelData.battery, levelData.batteryCoords, levelData.batteryRot);
+        setupObject(bulb, levelData.bulb, levelData.bulbCoords, levelData.bulbRot);
+        setupObject(resistor, levelData.resistor, levelData.resistorCoords, levelData.resistorRot);
+        setupObject(toggle, levelData.toggle, levelData.toggleCoords, levelData.toggleRot);
     }
 
-    private void setupObject(GameObject obj, bool active, Vector3 pos)
+    private void setupObject(GameObject obj, bool active, Vector3 pos, float rot)
     {
         obj.SetActive(active);
         obj.transform.position = pos;
+        obj.transform.rotation = Quaternion.Euler(new Vector3(0, rot, 0));
     }
 
     private void Electrify()
@@ -118,10 +123,6 @@ public class GameManager : MonoBehaviour
         Node bulbNode1 = null;
         Node resistorNode0 = null;
         Node resistorNode1 = null;
-        Node toggleNode0 = null;
-        Node toggleNode1 = null;
-
-
 
         List<Node> nodes = new List<Node>();
         List<GameObject> vertices = new List<GameObject>(GameObject.FindGameObjectsWithTag("Vertex"));
@@ -177,11 +178,11 @@ public class GameManager : MonoBehaviour
                             }
                             if (edge == toggle)
                             {
-                                if (currentVertex == toggleController.vertex0)
-                                    toggleNode0 = nodes[index];
-                                if (currentVertex == toggleController.vertex1)
-                                    toggleNode1 = nodes[index];
-                                // Also check if toggle is thrown, in which case add the next vertex
+                                if (toggleController.isOn)
+                                {
+                                    queue.Add(edge.GetComponent<ElectricalElementController>().vertex0);
+                                    queue.Add(edge.GetComponent<ElectricalElementController>().vertex1);
+                                }
                             }
                         }
                     }

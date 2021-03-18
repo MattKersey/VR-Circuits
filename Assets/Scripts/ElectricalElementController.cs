@@ -5,8 +5,9 @@ using UnityEngine;
 public class ElectricalElementController : MonoBehaviour
 {
 	public GameObject vertexPrefab;
+    public GameObject lightPrefab;
 
-	public GameObject vertex0;
+    public GameObject vertex0;
 	public GameObject vertex1;
 
 	public float voltage;
