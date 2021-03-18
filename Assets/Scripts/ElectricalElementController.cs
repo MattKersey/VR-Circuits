@@ -70,9 +70,11 @@ public class ElectricalElementController : MonoBehaviour
         if (vertex1 != null)
             endpoint1.transform.position = vertex1.transform.position;
     	else
-    		vertex1 = Instantiate(vertexPrefab, endpoint1.transform.position, Quaternion.identity);
+        {
+            vertex1 = Instantiate(vertexPrefab, endpoint1.transform.position, Quaternion.identity);
+            vertex1.GetComponent<VertexController>().spawnNewWire();
+        }
 
         vertex0.GetComponent<VertexController>().spawnNewWire();
-        vertex1.GetComponent<VertexController>().spawnNewWire();
     }
 }

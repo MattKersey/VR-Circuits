@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Networking;
 
 [System.Serializable]
 public class LevelData
@@ -87,29 +86,6 @@ public class GameManager : MonoBehaviour
     private void setupObject(GameObject obj, bool active, Vector3 pos)
     {
         obj.SetActive(active);
-        if (active)
-        {
-            StartCoroutine(UploadPosition(obj, "x", pos.x.ToString()));
-            StartCoroutine(UploadPosition(obj, "y", pos.y.ToString()));
-            StartCoroutine(UploadPosition(obj, "z", pos.z.ToString()));
-        }
-    }
-
-    IEnumerator UploadPosition(GameObject obj, string data, string val)
-    {
-        Entry entry = obj.GetComponent<RemoteTransformations>().entry;
-        string url = echoARurl + "&entry=" + entry.getId();
-        url += "&data=" + data;
-        url += "&value=" + val;
-        WWWForm form = new WWWForm();
-
-        form.AddField("key", echoAR.APIKey);
-        form.AddField("entry", entry.getId());
-        form.AddField("data", data);
-        form.AddField("value", val);
-        using (UnityWebRequest www = UnityWebRequest.Post(url, form))
-        {
-            yield return www.SendWebRequest();
-        }
+        obj.transform.position = pos;
     }
 }

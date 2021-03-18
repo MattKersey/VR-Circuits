@@ -41,7 +41,7 @@ public class CustomBehaviour : MonoBehaviour
     void Start()
     {
         // Add RemoteTransformations script to object and set its entry
-        this.gameObject.AddComponent<RemoteTransformations>().entry = entry;
+        // this.gameObject.AddComponent<RemoteTransformations>().entry = entry;
         BehaviorLinks bl = this.transform.parent.GetComponent<BehaviorLinks>();
         filamentMaterial = bl.filamentMaterial;
         glassMaterial = bl.glassMaterial;
@@ -101,6 +101,7 @@ public class CustomBehaviour : MonoBehaviour
     {
         if (this.transform.Find("Scene") == null)
             return false;
+        this.transform.localScale = new Vector3(9, 9, 9);
         controller = this.gameObject.AddComponent<ElectricalElementController>();
         controller.Start();
         connectionSetup(
@@ -120,6 +121,7 @@ public class CustomBehaviour : MonoBehaviour
             this.transform.Find("Scene").Find("filament2") == null
             )
             return false;
+        this.transform.localScale = new Vector3(5, 5, 5);
         controller = this.gameObject.AddComponent<ElectricalElementController>();
         controller.Start();
         this.transform.Find("Scene").Find("glass0").GetComponent<MeshRenderer>().material = glassMaterial;
@@ -138,6 +140,7 @@ public class CustomBehaviour : MonoBehaviour
     {
         if (this.transform.Find("Scene") == null)
             return false;
+        this.transform.localScale = new Vector3(5, 5, 5);
         controller = this.gameObject.AddComponent<ElectricalElementController>();
         controller.Start();
         connectionSetup(
@@ -152,6 +155,7 @@ public class CustomBehaviour : MonoBehaviour
     {
         if (this.transform.Find("Scene") == null)
             return false;
+        this.transform.localScale = new Vector3(30, 30, 30);
         controller = this.gameObject.AddComponent<ElectricalElementController>();
         controller.Start();
         connectionSetup(

@@ -6,24 +6,32 @@ public class WireController : ElectricalElementController
 {
     public Material liveMaterial;
     public Material deadMaterial;
+    public Material grabbedMaterial;
+    public Material releasedMaterial;
 
     private GameObject cylinder;
+    private bool isGrabbed = false;
     private bool isPoweredPrev = false;
+    private bool isGrabbedPrev = false;
 	private float thickness;
     private GameObject filament;
     private float filamentThickness;
-    private Renderer r;
+    private Renderer cylinderRenderer;
+    private Renderer endpointRenderer;
+    private OVRGrabbable endpointGrabbable;
 
 
     // Start is called before the first frame update
     new void Start()
     {
         base.Start();
+        endpointGrabbable = endpoint1.GetComponent<OVRGrabbable>();
+        endpointRenderer = endpoint1.GetComponent<Renderer>();
         cylinder = transform.Find("Cylinder").gameObject;
         filament = cylinder.transform.Find("Wire Filament").gameObject;
         thickness = cylinder.transform.localScale.x;
         filamentThickness = filament.transform.localScale.x;
-        r = cylinder.GetComponent<Renderer>();
+        cylinderRenderer = cylinder.GetComponent<Renderer>();
         voltage = 0;
         resistance = 0;
     }
@@ -31,6 +39,7 @@ public class WireController : ElectricalElementController
     // Update is called once per frame
     void Update()
     {
+        isGrabbed = endpointGrabbable.isGrabbed;
         Vector3 avgPos = 0.5f * (endpoint0.transform.localPosition + endpoint1.transform.localPosition);
         Vector3 difference = endpoint0.transform.localPosition - endpoint1.transform.localPosition;
         float length = 0.5f * difference.magnitude;
@@ -53,7 +62,12 @@ public class WireController : ElectricalElementController
         if (isPowered != isPoweredPrev)
         {
             isPoweredPrev = isPowered;
-            r.material = isPowered ? liveMaterial : deadMaterial; 
+            cylinderRenderer.material = isPowered ? liveMaterial : deadMaterial; 
+        }
+        if (isGrabbed != isGrabbedPrev)
+        {
+            isGrabbedPrev = isGrabbed;
+            endpointRenderer.material = isGrabbed ? grabbedMaterial : releasedMaterial;
         }
     }
 }
