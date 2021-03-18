@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2260345595427215332}
   m_Layer: 0
   m_Name: Vertex
-  m_TagString: Undefined
+  m_TagString: Vertex
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -11,6 +11,8 @@ public class VertexController : MonoBehaviour
     {
         GameObject wire = Instantiate(wirePrefab, this.transform.position, Quaternion.identity);
         wire.transform.parent = this.transform;
+        wire.GetComponent<WireController>().vertex0 = this.gameObject;
+        wire.transform.Find("Endpoint (1)").GetComponent<EndpointController>().AddVertex(this.gameObject);
     }
 
     public void removeConnectedComponent(GameObject go)

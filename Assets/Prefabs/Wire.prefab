@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 1811336853938812469}
   - component: {fileID: 6482570924041008355}
   - component: {fileID: 55910313671496263}
+  - component: {fileID: 269653965005109227}
   m_Layer: 0
   m_Name: Endpoint (1)
   m_TagString: Untagged
@@ -128,6 +129,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &269653965005109227
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1811336853938812467}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba894b38a6acfce4eab7a2ea517053b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1811336854242555869
 GameObject:
   m_ObjectHideFlags: 0
@@ -397,7 +410,7 @@ MonoBehaviour:
   deadMaterial: {fileID: 2100000, guid: b8cd3fcc53539444ebfee6c45da12a29, type: 2}
   grabbedMaterial: {fileID: 2100000, guid: a2cfad990e2c7e0459b51771e03dff7f, type: 2}
   releasedMaterial: {fileID: 2100000, guid: 8b5c88a9d6f1a5348a47ec30b50198dd, type: 2}
-  snapThreshold: 0.5
+  snapThreshold: 0.25
   isGrabbedPrev: 0
 --- !u!1 &4448446994705034671
 GameObject:
