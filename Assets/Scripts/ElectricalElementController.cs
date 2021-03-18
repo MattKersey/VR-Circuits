@@ -44,12 +44,19 @@ public class ElectricalElementController : MonoBehaviour
         }
 
         if (vertex0 != null)
+        {
             endpoint0.transform.position = vertex0.transform.position;
+        }
         else
+        {
             vertex0 = Instantiate(vertexPrefab, endpoint0.transform.position, Quaternion.identity);
+            vertex0.GetComponent<VertexController>().addConnectedComponent(this.gameObject);
+        }
 
         if (vertex1 != null)
+        {
             endpoint1.transform.position = vertex1.transform.position;
+        }
     	else
         {
             vertex1 = Instantiate(vertexPrefab, endpoint1.transform.position, Quaternion.identity);
@@ -57,5 +64,6 @@ public class ElectricalElementController : MonoBehaviour
         }
 
         vertex0.GetComponent<VertexController>().spawnNewWire();
+        vertex1.GetComponent<VertexController>().addConnectedComponent(this.gameObject);
     }
 }

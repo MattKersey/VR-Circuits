@@ -188,9 +188,11 @@ public class CustomBehaviour : MonoBehaviour
         vertex0.transform.localPosition = pos0;
         vertex0.transform.localScale = vertexScale;
         vertex0.SetActive(true);
+        vertex0.GetComponent<VertexController>().addConnectedComponent(this.gameObject);
         vertex1.transform.localPosition = pos1;
         vertex1.transform.localScale = vertexScale;
         vertex1.SetActive(true);
+        vertex1.GetComponent<VertexController>().addConnectedComponent(this.gameObject);
         controller.vertex0 = vertex0;
         controller.vertex1 = vertex1;
         vertex0.GetComponent<VertexController>().spawnNewWire();
