@@ -17,9 +17,9 @@
 	"resistorCoords": {
 		"x": 1,
 		"y": 0,
-		"z": 0
+		"z": 0.5
 	},
-	"resistorRot": 0,
+	"resistorRot": 90,
 	"toggle": true,
 	"toggleCoords": {
 		"x": 1,

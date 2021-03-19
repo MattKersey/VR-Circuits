@@ -37,11 +37,11 @@ public class UIController : MonoBehaviour
 
     public void PrevActive(bool active)
     {
-        prevButton.SetActive(active);
+        prevButton.GetComponent<Renderer>().enabled = active;
     }
 
     public void NextActive(bool active)
     {
-        nextButton.SetActive(active);
+        nextButton.GetComponent<Renderer>().enabled = active;
     }
 }
