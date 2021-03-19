@@ -166,7 +166,7 @@ public class CustomBehaviour : MonoBehaviour
         GameObject toggleHandle = Instantiate(toggleHandlePrefab);
         Vector3 position = toggleHandle.transform.localPosition;
         Vector3 scale = toggleHandle.transform.localScale;
-        toggleHandle.transform.parent = this.transform.Find("Scene").Find("Sphere.003");
+        toggleHandle.transform.parent = this.transform;
         toggleHandle.transform.localScale = scale;
         toggleHandle.transform.localPosition = position;
         controller = this.gameObject.AddComponent<ToggleController>();
