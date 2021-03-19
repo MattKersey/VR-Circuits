@@ -1,0 +1,30 @@
+{
+	"battery": true,
+	"batteryCoords": {
+		"x": -1,
+		"y": 0,
+		"z": 0
+	},
+	"batteryRot": 0,
+	"bulb": true,
+	"bulbCoords": {
+		"x": 0,
+		"y": 0.5,
+		"z": 0
+	},
+	"bulbRot": 0,
+	"resistor": true,
+	"resistorCoords": {
+		"x": 1,
+		"y": 0,
+		"z": 0
+	},
+	"resistorRot": 0,
+	"toggle": true,
+	"toggleCoords": {
+		"x": 1,
+		"y": 0,
+		"z": -0.5
+	},
+	"toggleRot": 90
+}

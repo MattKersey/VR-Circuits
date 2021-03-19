@@ -20,8 +20,9 @@ public class VertexController : MonoBehaviour
     {
         while (connectedComponents.Contains(go))
             connectedComponents.Remove(go);
-        if (connectedComponents.Count == 1)
-            Destroy(gameObject);
+        if (transform.parent == null || !transform.parent.CompareTag("Essential Edge"))
+            if (connectedComponents.Count == 1)
+                Destroy(gameObject);
     }
 
     public void addConnectedComponent(GameObject go)

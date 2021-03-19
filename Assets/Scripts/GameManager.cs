@@ -33,6 +33,9 @@ public class GameManager : MonoBehaviour
     public GameObject toggle = null;
     public echoAR echoAR;
 
+    public Material[] instructions;
+    public Renderer screen;
+
     public int level = 0;
 
     private bool isReady = false;
@@ -41,18 +44,19 @@ public class GameManager : MonoBehaviour
         "level0params",
         "level1params",
         "level2params",
-        "level3params",
-        "level4params"
+        "level3params"
     };
     private ElectricalElementController batteryController;
     private BulbController bulbController;
     private ElectricalElementController resistorController;
     private ToggleController toggleController;
+    private GameObject ui;
 
     // Start is called before the first frame update
     void Start()
     {
         echoARurl = "https://console.echoAR.xyz/post?key=" + echoAR.APIKey;
+        ui = this.transform.Find("UI").gameObject;
     }
 
     // Update is called once per frame
@@ -103,6 +107,31 @@ public class GameManager : MonoBehaviour
         setupObject(bulb, levelData.bulb, levelData.bulbCoords, levelData.bulbRot);
         setupObject(resistor, levelData.resistor, levelData.resistorCoords, levelData.resistorRot);
         setupObject(toggle, levelData.toggle, levelData.toggleCoords, levelData.toggleRot);
+        screen.material = instructions[level];
+        ui.SetActive(true);
+        if (level == 0)
+            ui.GetComponent<UIController>().PrevActive(false);
+        else
+            ui.GetComponent<UIController>().PrevActive(true);
+
+        if (level == levelFiles.Length - 1)
+            ui.GetComponent<UIController>().NextActive(false);
+        else
+            ui.GetComponent<UIController>().NextActive(true);
+    }
+
+    public void PreviousLevel()
+    {
+        if (level > 0)
+            level--;
+        setupLevel();
+    }
+
+    public void NextLevel()
+    {
+        if (level < levelFiles.Length - 1)
+            level++;
+        setupLevel();
     }
 
     private void setupObject(GameObject obj, bool active, Vector3 pos, float rot)
@@ -235,14 +264,15 @@ public class GameManager : MonoBehaviour
                 poweredNodes.Add(bulbNode1);
         }
 
-        if ((bulbNode0 == batteryNode0 && bulbNode1 == resistorNode1 && resistorNode0 == batteryNode1) ||
+        if (((bulbNode0 == batteryNode0 && bulbNode1 == resistorNode1 && resistorNode0 == batteryNode1) ||
             (bulbNode0 == batteryNode0 && bulbNode1 == resistorNode0 && resistorNode1 == batteryNode1) ||
             (bulbNode1 == batteryNode0 && bulbNode0 == resistorNode1 && resistorNode0 == batteryNode1) ||
             (bulbNode1 == batteryNode0 && bulbNode0 == resistorNode0 && resistorNode1 == batteryNode1) ||
             (bulbNode0 == batteryNode1 && bulbNode1 == resistorNode1 && resistorNode0 == batteryNode0) ||
             (bulbNode0 == batteryNode1 && bulbNode1 == resistorNode0 && resistorNode1 == batteryNode0) ||
             (bulbNode1 == batteryNode1 && bulbNode0 == resistorNode1 && resistorNode0 == batteryNode0) ||
-            (bulbNode1 == batteryNode1 && bulbNode0 == resistorNode0 && resistorNode1 == batteryNode0))
+            (bulbNode1 == batteryNode1 && bulbNode0 == resistorNode0 && resistorNode1 == batteryNode0)) && 
+            (resistorNode0 != resistorNode1 && bulbNode0 != bulbNode1))
         {
             if (!poweredNodes.Contains(bulbNode0))
                 poweredNodes.Add(bulbNode0);
